@@ -4,6 +4,17 @@ import { IBIXPackageResolver, IAvailableDownloads,
 import { util } from 'vortex-api';
 
 import semver from 'semver';
+// Platform detection utilities
+const isWindows = () => isWindows();
+const isMacOS = () => isMacOS();
+const isLinux = () => isLinux();
+const platformSwitch = <T>(cases: { windows?: T; macos?: T; linux?: T; default?: T }): T => {
+  if (isWindows() && cases.windows !== undefined) return cases.windows;
+  if (isMacOS() && cases.macos !== undefined) return cases.macos;
+  if (isLinux() && cases.linux !== undefined) return cases.linux;
+  return cases.default;
+};
+
 export const NEXUS = 'www.nexusmods.com';
 export const DOORSTOPPER_HOOK = 'winhttp.dll';
 export const DOORSTOPPER_CONFIG = 'doorstop_config.ini';
@@ -31,7 +42,7 @@ export const resolveBixPackage = (gameConf: IBepInExGameConfig): IBIXPackageReso
   const { architecture, bepinexVersion, bepinexCoercedVersion, unityBuild } = gameConf;
   const arch = architecture !== undefined ? architecture : 'x64';
   const version = bepinexCoercedVersion !== undefined ? bepinexCoercedVersion : DEFAULT_VERSION;
-  const platform = semver.gte(version.replace(/-.*$/igm, ''), '5.4.23') ? process.platform === 'win32' ? 'win_' : 'linux_' : '';
+  const platform = semver.gte(version.replace(/-.*$/igm, ''), '5.4.23') ? isWindows() ? 'win_' : 'linux_' : '';
   const unity = (unityBuild !== undefined)
     ? semver.gte(version, NEW_FILE_FORMAT_VERSION) ? `${unityBuild}_` : ''
     : semver.gte(version, NEW_FILE_FORMAT_VERSION) ? 'unitymono_' : '';
