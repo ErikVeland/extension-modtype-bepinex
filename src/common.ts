@@ -1,6 +1,6 @@
 import path from 'path';
 import { IBIXPackageResolver, IAvailableDownloads,
-  IBepInExGameConfig, INexusDownloadInfoExt } from './types';
+         IBepInExGameConfig, INexusDownloadInfoExt } from './types';
 import { util } from 'vortex-api';
 
 import semver from 'semver';

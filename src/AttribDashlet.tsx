@@ -20,7 +20,7 @@ class BepInExAttribDashlet extends PureComponentEx<{}, {}> {
       >
         <div>
           {t('Special thanks to {{author}} for developing this tool, and all its contributors: {{nl}}"{{contributors}}"',
-          { replace: { author: 'Bepis', nl: '\n', contributors: contributors.join(', ') }})}
+             { replace: { author: 'Bepis', nl: '\n', contributors: contributors.join(', ') }})}
         </div>
         <div>
           {t('BepInEx lives here: ')}
@@ -36,4 +36,4 @@ class BepInExAttribDashlet extends PureComponentEx<{}, {}> {
 }
 
 export default withTranslation(['common', 'bepinex-modtype'])
-  (BepInExAttribDashlet as any) as React.ComponentClass<{}>;
+(BepInExAttribDashlet as any) as React.ComponentClass<{}>;

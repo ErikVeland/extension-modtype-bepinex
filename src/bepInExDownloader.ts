@@ -67,7 +67,7 @@ async function download(api: types.IExtensionApi,
   }
 
   return api.emitAndAwait('nexus-download',
-    domainId, modId, fileId, archiveName, allowAutoInstall)
+                          domainId, modId, fileId, archiveName, allowAutoInstall)
     .then(() => {
       const { downloadId } = genDownloadProps(api, downloadInfo.archiveName);
       try {
@@ -82,7 +82,7 @@ async function download(api: types.IExtensionApi,
         log('info', 'user canceled download of BepInEx');
       } else {
         log('error', 'failed to download from NexusMods.com',
-          JSON.stringify(downloadInfo, undefined, 2));
+            JSON.stringify(downloadInfo, undefined, 2));
         err['attachLogOnReport'] = true;
         api.showErrorNotification('Failed to download BepInEx dependency', err);
       }
@@ -178,7 +178,7 @@ export async function ensureBepInExPack(api: types.IExtensionApi,
           + `?tab=files&file_id=${downloadRes.fileId}&nmm=1`;
         util.opn(url)
           .catch(err2 => api.showErrorNotification('Failed to download custom pack', err2,
-            { allowReport: false }));
+                                                   { allowReport: false }));
       }
       log('error', 'failed to download custom pack', err);
       return;
